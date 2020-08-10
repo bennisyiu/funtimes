@@ -1,0 +1,2 @@
+class Evint < ApplicationRecord
+end
