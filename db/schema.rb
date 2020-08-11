@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_130152) do
+ActiveRecord::Schema.define(version: 2020_08_11_034816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,13 @@ ActiveRecord::Schema.define(version: 2020_08_10_130152) do
     t.string "area"
     t.string "description"
     t.string "image_link"
-    t.string "date"
+    t.date "date"
     t.string "phone"
     t.string "wechatid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "venue_link"
+    t.string "period"
   end
 
   create_table "guests", force: :cascade do |t|
