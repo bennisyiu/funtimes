@@ -12,6 +12,6 @@ class Api::V1::EvintsController < Api::V1::BaseController
   private
 
   def evint_params
-    params.require(:evint).permit(:title, :evint_link, :venue, :address, :category, :time, :description, :image_link, :date, :wechatid)
+    params.require(:evint).permit(:title, :evint_link, :venue, :address, :lng, :lat, :category, :time, :description, :image_link, :date, :wechatid)
   end
 end
