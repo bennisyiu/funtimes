@@ -53,7 +53,7 @@ end
 
  def create_seeds
   num = 0
-  until num >= 3
+  until num >= 30
     date = (Time.now + num.days)
     day = (Time.now + num.days).strftime("%Y-%m-%d")
     url = "https://www.smartshanghai.com/events/?day=#{day}&view=list"
