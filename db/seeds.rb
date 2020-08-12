@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'nokogiri'
 require 'open-uri'
-require 'byebug'
+# require 'byebug'
 require 'date'
 
 Evint.destroy_all
