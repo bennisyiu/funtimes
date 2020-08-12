@@ -3,7 +3,9 @@ Rails.application.routes.draw do
    namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :evints, only: [:index, :show]
-      resources :itineraries, only: [:index, :show, :update, :destroy]
+      resources :itineraries, only: [:index, :show, :create, :update, :destroy]
+      resources :activities, only: [:destroy]
+      ## customed routes for activities
     end
   end
 end
