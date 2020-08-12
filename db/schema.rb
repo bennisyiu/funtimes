@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_034816) do
+ActiveRecord::Schema.define(version: 2020_08_12_042535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2020_08_11_034816) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "venue_link"
     t.string "period"
+    t.float "lng"
+    t.float "lat"
   end
 
   create_table "guests", force: :cascade do |t|
