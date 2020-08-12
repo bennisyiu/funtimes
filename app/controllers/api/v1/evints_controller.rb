@@ -3,6 +3,7 @@ class Api::V1::EvintsController < Api::V1::BaseController
   def index
     @evints = Evint.all
     # render json: @evints #Just for testing
+    # implement search function later, write conditions here - if params[:query] == ?? return ....
   end
 
   def show
