@@ -1,5 +1,6 @@
 class Api::V1::EvintsController < Api::V1::BaseController
   skip_before_action :verify_authenticity_token
+
   def index ## used for both HOME and Add New Itinerary page
     if params[:query].present?
         @evints = search
@@ -29,6 +30,6 @@ class Api::V1::EvintsController < Api::V1::BaseController
   private
 
   def evint_params
-    params.require(:evint).permit(:title, :evint_link, :venue, :address, :lng, :lat, :category, :time, :description, :image_link, :date, :wechatid)
+    params.require(:evint).permit(:title, :evint_link, :venue, :address, :lng, :lat, :category, :time, :description, :image_link, :date, :wechatid, :period)
   end
 end

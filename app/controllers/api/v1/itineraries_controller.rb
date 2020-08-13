@@ -2,7 +2,7 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   skip_before_action :verify_authenticity_token
   def index
     @itineraries = Itinerary.all
-    # DESC order (show latest first)
+    # DESC order (show latest itineraries first)
     # implement search function later, write conditions here - if params[:query] == ?? return ....
   end
 
