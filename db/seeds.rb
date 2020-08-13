@@ -10,7 +10,7 @@ require 'open-uri'
 # require 'byebug'
 require 'date'
 
-Evint.destroy_all
+# Evint.destroy_all
 
 def change_date_format(str)
   if str == 'Today'

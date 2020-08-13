@@ -15,11 +15,8 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   def create
     # it_params =  { user_id: itinerary_params[:user_id], date: itinerary_params[:date], name: itinerary_params[:name] }
     @itinerary = Itinerary.create!(itinerary_params)
-    puts "@itinerary #{@itinerarys}"
     @evint_array = params[:evint_array]
-    puts "evint array #{@evint_array}"
     @evint_array.each do |id|
-      puts "evint id #{id}"
       evint = Evint.find(id)
       @activity = Activity.create!(evint: evint, itinerary: @itinerary)
     end
@@ -27,6 +24,7 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   end
 
   def update
+    # trigger when user taps "update" button
     @itinerary = Itinerary.find(params[:id])
     # user find the itinerary he/she wants to edit
     # user chooses one of the 3 activities to remove from the itinerary
