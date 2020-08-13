@@ -2,7 +2,7 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   skip_before_action :verify_authenticity_token
   def index
     @itineraries = Itinerary.all
-    # render json: @itineraries #Just for testing
+    # DESC order (show latest first)
     # implement search function later, write conditions here - if params[:query] == ?? return ....
   end
 
@@ -11,7 +11,7 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   end
 
   def create
-    it_params =  {user_id: itinerary_params[:user_id], date: itinerary_params[:date], name: itinerary_params[:name]}
+    it_params =  { user_id: itinerary_params[:user_id], date: itinerary_params[:date], name: itinerary_params[:name] }
     @itinerary = Itinerary.create(it_params)
     @activity1 = Activity.new(evint_id: itinerary_params[:evint_id1])
     @activity1.itinerary = @itinerary
@@ -31,11 +31,16 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
 
   def update
     @itinerary = Itinerary.find(params[:id])
-    #
+    # user find the itinerary he/she wants to edit
+    # user chooses one of the 3 activities to remove from the itinerary
+    # then replace it with a new activity
+    # save
   end
 
   def destroy
     @itinerary = Itinerary.find(params[:id])
+    @itinerary.destroy
+    render json: { status: :itinerary_deleted }
   end
 
   private

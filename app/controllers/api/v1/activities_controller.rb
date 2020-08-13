@@ -6,5 +6,4 @@ class Api::V1::ActivitiesController < Api::V1::BaseController
     @activity.destroy
     render json: { status: :activity_deleted }
   end
-
 end
