@@ -1,6 +1,8 @@
 json.array! @itineraries do |itinerary|
   json.extract! itinerary, :id, :name, :date
   json.activities itinerary.activities do |activity|
+    json.activity_id activity.id
+    json.evint_id activity.evint.id
     json.title activity.evint.title
     json.date activity.evint.date
     json.time activity.evint.time
