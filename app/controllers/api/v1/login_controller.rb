@@ -1,4 +1,5 @@
-class LoginController < ApplicationController
+class Api::V1::LoginController < Api::V1::BaseController
+  skip_before_action :verify_authenticity_token
 
   URL = "https://api.weixin.qq.com/sns/jscode2session".freeze
 
@@ -19,5 +20,11 @@ class LoginController < ApplicationController
     render json: {
       userId: @user.id
     }
+  end
+
+  def update_user_info
+    @user = User.find(params[:id])
+    @user.update(name: params[:name], avatar: params[:avatar])
+    render json: { status: :user_info_updated }
   end
 end
