@@ -1,8 +1,9 @@
 class Api::V1::ItinerariesController < Api::V1::BaseController
   skip_before_action :verify_authenticity_token
+
   def index
     @user = User.find(params[:user_id])
-    @itineraries = Itinerary.all
+    @itineraries = @user.itineraries
     # DESC order (show latest itineraries first)
     # implement search function later, write conditions here - if params[:query] == ?? return ....
   end
@@ -13,16 +14,16 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
 
   def create
     # it_params =  { user_id: itinerary_params[:user_id], date: itinerary_params[:date], name: itinerary_params[:name] }
-    @itinerary = Itinerary.create(itinerary_params)
-    # @activity1 = Activity.new(evint_id: itinerary_params[:evint_id1])
-    # @activity1.itinerary = @itinerary
-    # @activity1.save
-    # @activity2 = Activity.new(evint_id: itinerary_params[:evint_id2])
-    # @activity2.itinerary = @itinerary
-    # @activity2.save
-    # @activity3 = Activity.new(evint_id: itinerary_params[:evint_id3])
-    # @activity3.itinerary = @itinerary
-    # @activity3.save
+    @itinerary = Itinerary.create!(itinerary_params)
+    puts "@itinerary #{@itinerarys}"
+    @evint_array = params[:evint_array]
+    puts "evint array #{@evint_array}"
+    @evint_array.each do |id|
+      puts "evint id #{id}"
+      evint = Evint.find(id)
+      @activity = Activity.create!(evint: evint, itinerary: @itinerary)
+    end
+    render json: { status: "Itinerary created!" }
   end
 
   def update
@@ -42,6 +43,6 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   private
 
   def itinerary_params
-    params.require(:itinerary).permit(:user_id, :date, :name) #, :evint_id1, :evint_id2, :evint_id3)
+    params.require(:itinerary).permit(:user_id, :date, :name)
   end
 end
