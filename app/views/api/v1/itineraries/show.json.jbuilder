@@ -8,6 +8,7 @@ json.extract! @itinerary, :id, :name, :date
     json.venue activity.evint.venue
     json.category activity.evint.category
     json.image activity.evint.image_link
+    json.address activity.evint.address
     json.lng activity.evint.lng
     json.lat activity.evint.lat
   end
