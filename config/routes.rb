@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :evints, only: [:index, :show]
       resources :itineraries, only: [:index, :show, :create, :update, :destroy]
       resources :activities, only: [:destroy]
+      resources :guests, only: [:create, :destroy]
       ## resources :guests
     end
   end
