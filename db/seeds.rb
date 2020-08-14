@@ -10,7 +10,9 @@ require 'open-uri'
 # require 'byebug'
 require 'date'
 
-# Evint.destroy_all
+Activity.destroy_all
+Itinerary.destroy_all
+Evint.destroy_all
 
 def change_date_format(str)
   if str == 'Today'
@@ -27,7 +29,16 @@ def scrape_event_details(event_link)
   details = {}
   card = parsed.css('div.box')
   details[:address] = card.css('div.fast-navigation').css('div.dizhi span').first.text.split(' ').join(' ')
-  details[:description] = card.css('div.xinxi').css('div.wenzi p').text.strip
+  if card.css('div.xinxi').css('div.wenzi p').present?
+    description = card.css('div.xinxi').css('div.wenzi p').text.strip
+    if description.include?('rmb') || description.include?('RMB')
+      details[:description] = 'Reach out for details!'
+    else
+      details[:description] = description
+    end
+  else
+    details[:description] = 'Not available'
+  end
   card.css('div.xinxi').css('ul.biaoqian li').each do |item|
     if item.css('span').text.downcase.include?("time")
       details[:time] = item.text.split().join.gsub('TIME:','')
@@ -79,13 +90,13 @@ end
           else
             evint[:category] = category
           end
-          p evint[:category]
+          evint[:category]
           evint[:venue] = li.css('ul.riqi li').children[5].children.text.strip
           evint[:period] = li.css('ul.riqi li').children[8].text.strip
-          p evint[:date] = day
+          puts evint[:date] = day
           details = scrape_event_details(evint[:evint_link])
           evint[:address] = details[:address]
-          evint[:description] = details[:description]
+          puts evint[:description] = details[:description]
           evint[:time] = details[:time]
           evint[:wechatid] = details[:wechatid]
           evint[:lng] = details[:lng]

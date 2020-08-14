@@ -24,12 +24,22 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   end
 
   def update
-    # trigger when user taps "update" button
     @itinerary = Itinerary.find(params[:id])
-    # user find the itinerary he/she wants to edit
-    # user chooses one of the 3 activities to remove from the itinerary
-    # then replace it with a new activity
-    # save
+    @remove_activities = params[:remove_activities] ## an array of act_id
+    Activity.where(id: @remove_activities).destroy_all
+    @evint_array = params[:evint_array]
+    @evint_array.each do |id|
+      evint = Evint.find(id)
+      @activity = Activity.create!(evint: evint, itinerary: @itinerary)
+    end
+
+    # user find the itinerary that he/she wants to edit
+    # front end - edit form
+    # user chooses activity to remove (activity.destroy) ** an array of act_id -> destroy
+    # user replaces it with another evint (as new activity) ** an array of evint_id --> create new acts
+    # PUT request triggered when user taps "update" button
+    #save
+    # redirect (front end)
   end
 
   def destroy
