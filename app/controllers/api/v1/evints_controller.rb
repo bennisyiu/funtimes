@@ -15,10 +15,15 @@ class Api::V1::EvintsController < Api::V1::BaseController
 
   def index
     @evints = Evint.where("date >= ?", Date.today)
-    if params[:date].present?
+    if params[:date].present? && params[:query].present?
+      @evints = @evints.where(date: params[:date])
+      @evints = search(@evints)
+    elsif params[:date].present?
       @evints = @evints.where(date: params[:date])
     elsif params[:query].present?
       @evints = search(@evints)
+    else
+      @evints
     end
   end
 

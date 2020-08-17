@@ -4,8 +4,6 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   def index
     @user = User.find(params[:user_id])
     @itineraries = @user.itineraries
-    # DESC order (show latest itineraries first)
-    # implement search function later, write conditions here - if params[:query] == ?? return ....
   end
 
   def show
@@ -13,7 +11,6 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   end
 
   def create
-    # it_params =  { user_id: itinerary_params[:user_id], date: itinerary_params[:date], name: itinerary_params[:name] }
     @itinerary = Itinerary.create!(itinerary_params)
     @evint_array = params[:evint_array]
     @evint_array.each do |id|
