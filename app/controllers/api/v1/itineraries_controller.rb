@@ -29,6 +29,7 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
       evint = Evint.find(id)
       @activity = Activity.create!(evint: evint, itinerary: @itinerary)
     end
+    render json: { status: "Itinerary updated!" }
 
     # user find the itinerary that he/she wants to edit
     # front end - edit form
