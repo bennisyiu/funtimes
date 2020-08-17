@@ -6,8 +6,8 @@ Rails.application.routes.draw do
       put '/update_user/:id', to: 'login#update_user_info'
       resources :evints, only: [:index, :show]
       resources :itineraries, only: [:index, :show, :create, :update, :destroy]
-      resources :activities, only: [:destroy]
-      resources :guests, only: [:create, :destroy]
+      resources :activities, only: [:update, :destroy]
+      resources :guests, only: [:destroy]
       ## resources :guests
     end
   end
