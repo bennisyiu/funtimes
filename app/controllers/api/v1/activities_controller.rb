@@ -7,6 +7,7 @@ class Api::V1::ActivitiesController < Api::V1::BaseController
     @activity = Activity.find(params[:id])
     @user_as_guest = User.find(params[:user_id])
     @guest = Guest.create(user: @user_as_guest, activity: @activity)
+    render json: { status: :guest_created }
   end
 
   def destroy
