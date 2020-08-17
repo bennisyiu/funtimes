@@ -1,18 +1,6 @@
 class Api::V1::EvintsController < Api::V1::BaseController
   skip_before_action :verify_authenticity_token
 
-  # def index ## used for both HOME and Add New Itinerary page
-  #   if params[:query].present?
-  #       @evints = search
-  #   elsif params[:date].present? ## filter by date
-  #     @evints = Evint.where(date: params[:date])
-  #   else
-  #     @evints = Evint.where("date >= ?", Date.today)
-  #   end
-  #   # since we have past events in the database, only display future events (from Date.today)
-  #   # implement search function later, write conditions here - if params[:query] == ?? return ....
-  # end
-
   def index
     @evints = Evint.where("date >= ?", Date.today)
     if params[:date].present? && params[:query].present?
@@ -32,9 +20,37 @@ class Api::V1::EvintsController < Api::V1::BaseController
       evints.title @@ :query \
       OR evints.venue @@ :query \
       OR evints.category @@ :query \
-      OR evints.description @@ :query \
     "
-  evints.where(sql_query, query: "%#{params[:query]}%")
+    evints.where(sql_query, query: "%#{params[:query]}%")
+  end
+
+  def randomizer
+    # front end - user inputs max. 3 preferred categories (an array of categories)
+    # user spins the wheel to trigger the GET request
+    # loop through the category array
+    # push evints of each cateory to the random_array
+    # random_array.sample
+    # return 3 evints
+    @evints = Evint.where("date >= ?", Date.today)
+    evints_array = []
+    @results = []
+    @category_array = params[:category_array] # array of categories from front end
+    @category_array.each do |category|
+      evints = categorised(@evints, category) # all evints of the same cateory
+      evints.each do |evint|
+        evints_array << evint
+      end
+    end
+    3.times do
+      result = evints_array.sample
+      evints_array = evints_array.reject{ |x| x == result }
+      @results << result
+    end
+    @results
+  end
+
+  def categorised(evints, category)
+    evints.where("category = ?", category)
   end
 
   def show
