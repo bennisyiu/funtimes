@@ -12,6 +12,7 @@ class Api::V1::ActivitiesController < Api::V1::BaseController
 
   def destroy
     @activity = Activity.find(params[:id])
+    @activity.guests.destroy_all
     @activity.destroy
     render json: { status: :activity_deleted }
   end
