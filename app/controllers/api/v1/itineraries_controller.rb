@@ -42,6 +42,8 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
 
   def destroy
     @itinerary = Itinerary.find(params[:id])
+    @activities = @itinerary.activities
+    @activities.destroy_all
     @itinerary.destroy
     render json: { status: :itinerary_deleted }
   end
