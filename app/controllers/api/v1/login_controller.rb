@@ -22,9 +22,14 @@ class Api::V1::LoginController < Api::V1::BaseController
     }
   end
 
+  def user_info
+    @user = User.find(params[:id])
+    render json: {user: @user}
+  end
+
   def update_user_info
     @user = User.find(params[:id])
     @user.update(name: params[:name], avatar: params[:avatar])
-    render json: { status: :user_info_updated }
+    # render json: { status: :user_info_updated }
   end
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get '/login', to: 'login#login'
       post '/login', to: 'login#login'
       put '/update_user/:id', to: 'login#update_user_info'
+      get '/users/:id', to: 'login#user_info'
       get '/randomizer', to: 'evints#randomizer'
       resources :evints, only: [:index, :show]
       resources :itineraries, only: [:index, :show, :create, :update, :destroy]
