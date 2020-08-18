@@ -47,7 +47,7 @@ class Api::V1::EvintsController < Api::V1::BaseController
       @results << result
     end
     @results
-    render json: { status: "3 events are generated!" }
+    # render json: { status: "3 events are generated!" }
   end
 
   def categorised(evints, category)
