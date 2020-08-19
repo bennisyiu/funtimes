@@ -25,12 +25,6 @@ class Api::V1::EvintsController < Api::V1::BaseController
   end
 
   def randomizer
-    # front end - user inputs max. 3 preferred categories (an array of categories)
-    # user spins the wheel to trigger the GET request
-    # loop through the category array
-    # push evints of each cateory to the random_array
-    # random_array.sample
-    # return 3 evints
     @evints = Evint.where("date >= ?", Date.today)
     evints_array = []
     @results = []

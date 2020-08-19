@@ -31,13 +31,6 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
     end
     render json: { status: "Itinerary updated!" }
 
-    # user find the itinerary that he/she wants to edit
-    # front end - edit form
-    # user chooses activity to remove (activity.destroy) ** an array of act_id -> destroy
-    # user replaces it with another evint (as new activity) ** an array of evint_id --> create new acts
-    # PUT request triggered when user taps "update" button
-    #save
-    # redirect (front end)
   end
 
   def destroy

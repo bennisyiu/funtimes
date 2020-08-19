@@ -10,6 +10,7 @@ require 'open-uri'
 # require 'byebug'
 require 'date'
 
+Guest.destroy_all
 Activity.destroy_all
 Itinerary.destroy_all
 Evint.destroy_all
@@ -50,19 +51,19 @@ def scrape_event_details(event_link)
   end
   if !card.css('#pane-map').css('#locsel-lng').present?
     details[:lng] = 31.2304 # longtitude of Shanghai
-    details[:lat] = 121.4737 #latitude of Shanghai
+    details[:lat] = 121.4737 # latitude of Shanghai
   elsif card.css('#pane-map').present?
     map = card.css('#pane-map')
     details[:lng] = map.css('#locsel-lng').attribute('value').to_s.to_f
     details[:lat] = map.css('#locsel-lat').attribute('value').to_s.to_f
   else
     details[:lng] = 31.2304 # longtitude of Shanghai
-    details[:lat] = 121.4737 #latitude of Shanghai
+    details[:lat] = 121.4737 # latitude of Shanghai
   end
 return details
 end
 
- def create_seeds
+def create_seeds
   num = 0
   until num >= 30
     date = (Time.now + num.days)
@@ -88,15 +89,24 @@ end
           if category == 'NOT TAGGED'
             evint[:category] = 'Other'
           else
-            evint[:category] = category
+            if category.include?('&') && category.include?(',')
+              puts evint[:category] = category.split(',')[0]
+            elsif category.include?('&')
+              puts evint[:category] = category.split()[0]
+            elsif category.include?(',')
+              puts evint[:category] = category.split(',')[0].gsub(',','')
+            elsif category.include?('Travel') || category.include?('travel')
+              puts evint[:category] = 'Other'
+            else
+              puts evint[:category] = category
+            end
           end
-          evint[:category]
           evint[:venue] = li.css('ul.riqi li').children[5].children.text.strip
           evint[:period] = li.css('ul.riqi li').children[8].text.strip
           puts evint[:date] = day
           details = scrape_event_details(evint[:evint_link])
           evint[:address] = details[:address]
-          puts evint[:description] = details[:description]
+          evint[:description] = details[:description]
           evint[:time] = details[:time]
           evint[:wechatid] = details[:wechatid]
           evint[:lng] = details[:lng]
@@ -110,5 +120,4 @@ end
   end
 end
 create_seeds
-
 
