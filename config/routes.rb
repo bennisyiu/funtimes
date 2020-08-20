@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get '/randomizer', to: 'evints#randomizer'
       resources :evints, only: [:index, :show]
       resources :itineraries, only: [:index, :show, :create, :update, :destroy]
-      resources :activities, only: [:update, :destroy]
+      resources :activities, only: [:destroy]
       resources :guests, only: [:destroy]
     end
   end

@@ -12,7 +12,8 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
 
   def create
     @itinerary = Itinerary.create!(itinerary_params)
-
+    @user = User.find(params[:user_id])
+    @guest = Guest.create!(user: @user, itinerary: @itinerary)
     @evint_array = params[:evint_array]
     @evint_array.each do |id|
       evint = Evint.find(id)
@@ -24,7 +25,7 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   def update
     @itinerary = Itinerary.find(params[:id])
     @user_as_guest = User.find(params[:user_id])
-    @guest = Guest.create(user: @user_as_guest, activity: @activity)
+    @guest = Guest.create(user: @user_as_guest, activity: @itinerary)
     # render json: { status: :guest_created }
       # @remove_activities = params[:remove_activities] ## an array of act_id
       # Activity.where(id: @remove_activities).destroy_all
@@ -33,13 +34,14 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
       #   evint = Evint.find(id)
       #   @activity = Activity.create!(evint: evint, itinerary: @itinerary)
       # end
-    # render json: { status: "Itinerary updated!" }
+    render json: { status: "Itinerary updated!" }
 
   end
 
   def destroy
     @itinerary = Itinerary.find(params[:id])
     @itinerary.activities.destroy_all
+    @itinerary.guests.destroy_all
     @itinerary.destroy
     render json: { status: :itinerary_deleted }
   end
