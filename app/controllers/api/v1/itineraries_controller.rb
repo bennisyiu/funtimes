@@ -13,7 +13,9 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
   def create
     @itinerary = Itinerary.create!(itinerary_params)
     @user = User.find(params[:user_id])
+    p @user
     @guest = Guest.create!(user: @user, itinerary: @itinerary)
+    p @guest
     @evint_array = params[:evint_array]
     @evint_array.each do |id|
       evint = Evint.find(id)
