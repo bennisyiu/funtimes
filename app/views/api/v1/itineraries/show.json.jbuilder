@@ -1,4 +1,7 @@
 json.extract! @itinerary, :id, :name, :date
+ json.guests @itinerary.users do |user|
+    json.extract! user, :id, :name, :avatar
+ end
   json.activities @itinerary.activities do |activity|
     json.activity_id activity.id
     json.evint_id activity.evint.id
@@ -12,11 +15,4 @@ json.extract! @itinerary, :id, :name, :date
     json.lng activity.evint.lng
     json.lat activity.evint.lat
   end
-  json.guests activity.guests do |guest|
-    json.guest_id guest.id
-    json.user_id guest.user.id
-    json.guest_name guest.user.name
-    json.guest_avatar guest.user.avatar
-  end
-  json.guest_avatars activity.guests.map{|g| g.user.avatar}
 json.created_at @itinerary.created_at.strftime("%e %b %Y %H:%M:%S%p")
