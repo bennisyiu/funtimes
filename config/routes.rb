@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       get '/users/:id', to: 'login#user_info'
       get '/randomizer', to: 'evints#randomizer'
       resources :evints, only: [:index, :show]
-      resources :itineraries, only: [:index, :show, :create, :update, :destroy]
+      resources :itineraries, only: [:index, :show, :create, :destroy]
       resources :activities, only: [:destroy]
       resources :guests, only: [:destroy]
     end

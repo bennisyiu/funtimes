@@ -1,8 +1,8 @@
 json.array! @itineraries do |itinerary|
   json.extract! itinerary, :id, :name, :date
-  json.guests itinerary.users do |user|
-    json.extract! user, :id, :name, :avatar
-  end
+  # json.guests itinerary.users do |user|
+  #   json.extract! user, :id, :name, :avatar
+  # end
   json.activities itinerary.activities do |activity|
     json.activity_id activity.id
     json.evint_id activity.evint.id

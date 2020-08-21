@@ -12,8 +12,8 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
 
   def create
     @itinerary = Itinerary.create!(itinerary_params)
-    @user = User.find(params[:user_id])
-    @guest = Guest.create!(user: @user, itinerary: @itinerary)
+    # @user = User.find(params[:user_id])
+    # @guest = Guest.create!(user: @user, itinerary: @itinerary)
     @evint_array = params[:evint_array]
     @evint_array.each do |id|
       evint = Evint.find(id)
@@ -22,12 +22,12 @@ class Api::V1::ItinerariesController < Api::V1::BaseController
     render json: { status: @itinerary }
   end
 
-  def update
-    @itinerary = Itinerary.find(params[:id])
-    @user_as_guest = User.find(params[:user_id])
-    @guest = Guest.create!(user: @user_as_guest, itinerary: @itinerary)
-    render json: { status: @itinerary }
-  end
+  # def update
+  #   @itinerary = Itinerary.find(params[:id])
+  #   @user_as_guest = User.find(params[:user_id])
+  #   @guest = Guest.create!(user: @user_as_guest, itinerary: @itinerary)
+  #   render json: { status: @itinerary }
+  # end
 
   def destroy
     @itinerary = Itinerary.find(params[:id])
