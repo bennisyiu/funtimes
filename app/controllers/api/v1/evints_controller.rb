@@ -25,23 +25,30 @@ class Api::V1::EvintsController < Api::V1::BaseController
   end
 
   def randomizer
-    @evints = Evint.where("date >= ?", Date.today)
+    # user pick a date first
+    # then pick preferred categories
+    @evints = Evint.where(date: params[:date])
     evints_array = []
     @results = []
     @category_array = params[:category_array] # array of categories from front end
     @category_array.each do |category|
       evints = categorised(@evints, category) # all evints of the same cateory
+      next if evints.blank?
+
       evints.each do |evint|
         evints_array << evint
       end
     end
-    3.times do
-      result = evints_array.sample
-      evints_array = evints_array.reject{ |x| x == result }
-      @results << result
+
+    if evints_array.count > 3
+      3.times do
+        result = evints_array.sample
+        evints_array = evints_array.reject { |x| x == result }
+        @results << result
+      end
+    else
+      @results = evints_array
     end
-    @results
-    # render json: { status: "3 events are generated!" }
   end
 
   def categorised(evints, category)
