@@ -14,5 +14,5 @@ FunMapped is the graduation project my teammate, Jeff and I developed for our Le
 4. Itinerary
 5. User
 
-[Link](https://youtu.be/36X3Keu3t_A)
+[Demo Video](https://youtu.be/36X3Keu3t_A)
 
