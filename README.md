@@ -1,24 +1,18 @@
-# README
+# *FunMapped*
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### is a WeChat Miniprogramme that helps you explore the latest events in Shanghai and create itineraries at your fingertips. Having all the good fun MAPPED and invite your friends! If you are not sure what's out there, hit the randomizer and FunMapped will generate events of your interest!
 
-Things you may want to cover:
+FunMapped is the graduation project my teammate, Jeff and I developed for our Le Wagon Full Stack Web Development Programme. 
 
-* Ruby version
+**Frontend:** WeChat DevTools (by Jeff)
+**Backend:** Ruby on Rails API | Database: PostgresQL (by Bennis)
 
-* System dependencies
+**Models:** 
+1. Activity
+2. Event
+3. Guest
+4. Itinerary
+5. User
 
-* Configuration
+[Link](https://youtu.be/36X3Keu3t_A)
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
