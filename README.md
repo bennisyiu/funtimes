@@ -7,6 +7,8 @@ FunMapped is the graduation project my teammate, Jeff and I developed for our Le
 **Frontend:** WeChat DevTools (by Jeff)
 **Backend:** Ruby on Rails API | Database: PostgresQL (by Bennis)
 
+**API:** The app’s API came from event data scraped from SmartShanghai.com (for learning purpose only 😎) 
+
 **Models:** 
 1. Activity
 2. Event
