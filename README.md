@@ -1,3 +1,6 @@
+![FunMapped_cover](https://github.com/bennisyiu/funtimes/assets/65800562/3a8b95a3-2d3d-4805-b49b-34f6305eef94)
+
+
 # *FunMapped*
 
 ### is a WeChat Miniprogramme that helps you explore the latest events in Shanghai and create itineraries at your fingertips. Having all the good fun MAPPED and invite your friends! If you are not sure what's out there, hit the randomizer and FunMapped will generate events of your interest!
